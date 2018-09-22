@@ -27,10 +27,7 @@ module.exports.init = function() {
   
   /**TODO
   Serve static files */
-  app.use(express.static('public'));
-  app.use(express.static('files'));
-  app.get('/', express.static('public'));
-  
+  app.use(express.static('client')); // serve all static files available under client folder
 
   /**TODO 
   Use the listings router for requests to the api */
@@ -39,7 +36,9 @@ module.exports.init = function() {
 
   /**TODO 
   Go to homepage for all routes not specified */
-
+  app.use('*', function(req, res) {
+    res.redirect('/');
+  });
 
   return app;
 };  
