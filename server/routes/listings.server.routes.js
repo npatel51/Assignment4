@@ -11,6 +11,17 @@ router.route('/')
   .get(listings.list)
   .post(listings.create);
 
+//retreive all listings
+  router.route('/api/listings')
+  .get(listings.list)
+  .post(listings.create);
+
+// get specific listing
+router.route('/api/listings/:listingId')
+  .get(listings.read)
+  .put(listings.update)
+  .delete(listings.delete);
+
 
 /*
   The ':' specifies a URL parameter. 
@@ -19,6 +30,8 @@ router.route('/:listingId')
   .get(listings.read)
   .put(listings.update)
   .delete(listings.delete);
+
+  
 
 /*
   The 'router.param' method allows us to specify middleware we would like to use to handle 

@@ -14,13 +14,10 @@ var mongoose = require('mongoose'),
 
 /* Create a listing */
 exports.create = function(req, res) {
-
   /* Instantiate a Listing */
-  var listing = new Listing(req.body);
-
-
+  var newListing = new Listing(req.body);
   /* Then save the listing */
-  listing.save(function(err) {
+  newListing.save(function(err,listing) {
     if(err) {
       console.log(err);
       res.status(400).send(err);
@@ -37,12 +34,22 @@ exports.read = function(req, res) {
 };
 
 /* Update a listing */
+//need to fix update 
 exports.update = function(req, res) {
-  var listing = req.listing;
-
   /** TODO **/
   /* Replace the article's properties with the new properties found in req.body */
   /* Save the article */
+  Listing.findOneAndUpdate({_id:req.id},req.body,function (err, listing) {
+      if (err)  return res.status(500).send(err);
+       // update all params set in request body 
+      for(param in req.body){
+        listing[param] = req.body[param];
+      }
+      listing.save(function(err,listing){
+        if (err)  return res.status(500).send(err);
+        return res.status(200).send(listing);  
+      });
+    });
 };
 
 /* Delete a listing */
@@ -51,12 +58,24 @@ exports.delete = function(req, res) {
 
   /** TODO **/
   /* Remove the article */
+
+  Listing.deleteOne({},function (err, listing) {
+    if (err)  return res.status(500).send(err);
+  });
+// document deleted succesfully 
+  return res.status(200).send();
 };
 
 /* Retreive all the directory listings, sorted alphabetically by listing code */
 exports.list = function(req, res) {
   /** TODO **/
   /* Your code here */
+  Listing.find().sort({code:1}).exec(function(err,listings){
+    if (err) {
+      res.status(404).send(JSON.stringify({'message':'Something went wrong on our side :('}));
+    }
+    res.status(200).send(listings);
+  });
 };
 
 /* 
@@ -72,6 +91,7 @@ exports.listingByID = function(req, res, next, id) {
       res.status(400).send(err);
     } else {
       req.listing = listing;
+      req.id = id;
       next();
     }
   });
