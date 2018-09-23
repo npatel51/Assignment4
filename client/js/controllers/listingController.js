@@ -64,9 +64,9 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
     
     };
 
-    $scope.showDetails = function(e,index) {
+    $scope.showDetails = function(event,index) {
       // validate whether or not if this element was clicked 
-      if( e.target == e.currentTarget){
+      if( event.currentTarget.nodeName === 'TR'){
         $scope.showDetail = true;
         $scope.detailedInfo = $scope.listings[index];
       }
