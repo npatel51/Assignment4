@@ -36,7 +36,7 @@
                 --> 
                 <!-- iterate through the listings and ask each object for its code and name and filter it based
                 on search input -->
-                <tr ng-repeat="listing in listings | filter:name" ng-click="showDetails(listings.indexOf(listing))">
+                <tr ng-repeat="listing in listings | filter:name" ng-click="showDetails($event,listings.indexOf(listing))">
                   <td>{{ listing.code }}</td>
                   <td>{{ listing.name }}</td>
                   <td>

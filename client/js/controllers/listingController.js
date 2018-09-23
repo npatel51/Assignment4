@@ -37,7 +37,7 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
       });
       
     };
-    
+
     $scope.capitalize = function(string){
       let strs = string.toLowerCase().split(' ');
       for (let i = 0; i < strs.length; i++) {
@@ -64,9 +64,12 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
     
     };
 
-    $scope.showDetails = function(index) {
-      $scope.showDetail = true;
-      $scope.detailedInfo = $scope.listings[index];
+    $scope.showDetails = function(e,index) {
+      // validate whether or not if this element was clicked 
+      if( e.target == e.currentTarget){
+        $scope.showDetail = true;
+        $scope.detailedInfo = $scope.listings[index];
+      }
     };
   }
 ]);

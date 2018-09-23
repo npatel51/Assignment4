@@ -12,7 +12,6 @@ angular.module('listings', []).factory('Listings', function($http) {
 	   /**TODO
         return result of HTTP delete method
        */
-      console.log(listing);
       return $http.delete('http://localhost:8080/api/listings/'+listing._id,listing);
     }
   };
