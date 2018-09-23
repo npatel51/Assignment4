@@ -28,7 +28,7 @@ module.exports.init = function() {
   /**TODO
   Serve static files */
   app.use(express.static('client')); // serve all static files available under client folder
-
+  
   /**TODO 
   Use the listings router for requests to the api */
   app.use(listingsRouter);
