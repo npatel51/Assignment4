@@ -46,11 +46,12 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
       return strs.join(' '); 
     }
 
-    $scope.deleteListing = function(index) {
+    $scope.deleteListing = function($event,index) {
 	   /**TODO
         Delete the article using the Listings factory. If the removal is successful, 
 		navigate back to 'listing.list'. Otherwise, display the error. 
        */
+      $event.stopPropagation();
       Listings.delete($scope.listings[index]).then(function(response){
          //if delete was succesfull, then redirect to listing.list which retrieves all the listings
          Listings.getAll().then(function(response) {
@@ -64,12 +65,10 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
     
     };
 
-    $scope.showDetails = function(event,index) {
+    $scope.showDetails = function(index) {
       // validate whether or not if this element was clicked 
-      if( event.currentTarget.nodeName === 'TR'){
         $scope.showDetail = true;
         $scope.detailedInfo = $scope.listings[index];
-      }
     };
   }
 ]);

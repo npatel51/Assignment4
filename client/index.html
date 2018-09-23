@@ -36,11 +36,11 @@
                 --> 
                 <!-- iterate through the listings and ask each object for its code and name and filter it based
                 on search input -->
-                <tr ng-repeat="listing in listings | filter:name" ng-click="showDetails($event,listings.indexOf(listing))">
+                <tr ng-repeat="listing in listings | filter:name" ng-click="showDetails(listings.indexOf(listing))">
                   <td>{{ listing.code }}</td>
                   <td>{{ listing.name }}</td>
                   <td>
-                      <button ng-click="deleteListing(listings.indexOf(listing))" class="btn btn-danger btn-sm"><span class=" 	glyphicon glyphicon-remove"></span></button>
+                      <button ng-click="deleteListing($event,listings.indexOf(listing))" class="btn btn-danger btn-sm"><span class=" 	glyphicon glyphicon-remove"></span></button>
                   </td>
                 </tr>
             </table>
